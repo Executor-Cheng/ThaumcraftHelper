@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace ThaumcraftHelper
 {
-    [DebuggerDisplay("{AspectName_Chn} - {AspectName_Eng}")]
+    [DebuggerDisplay("{AspectName_Chn} - {AspectName_Eng} {ContributorsStr}")]
     public class Aspect
     {
         /// <summary>
@@ -38,6 +39,11 @@ namespace ThaumcraftHelper
         /// 元素完整名
         /// </summary>
         public string AspectName_Full => $"{AspectName_Eng}{AspectName_Chn}";
+        /// <summary>
+        /// 是否为元始要素
+        /// </summary>
+        public bool IsPrimary => Contributors.Count < 1;
+        public string ContributorsStr => $"{(Contributors.Count == 0 ? "" : $" <= {string.Join(" + ", Contributors.Select(p => p.AspectName_Full))}")}";
         /// <summary>
         /// 可以连接的元素
         /// </summary>
